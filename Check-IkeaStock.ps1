@@ -41,7 +41,6 @@ foreach ($product in $products.Keys) {
     Price = $productInfo.price
   }
   foreach ($store in $stores.Keys) {
-    # ikea-availability.ps1 stock --reporter json --store $store $product
     $storeId = $stores[$store]
     $resultJson = ikea-availability stock --store $storeId $product --reporter json
     $result = $resultJson | ConvertFrom-Json
