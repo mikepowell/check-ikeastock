@@ -45,7 +45,7 @@ foreach ($product in $products.Keys) {
     $resultJson = ikea-availability stock --store $storeId $product --reporter json
     $result = $resultJson | ConvertFrom-Json
     $item | Add-Member -MemberType NoteProperty -Name $store -Value $result.availability.stock
-    if ($result.availability.stock -gt 0) {
+    if ($result.availability.stock -ge $products[$product]) {
       Write-Host " $store" -ForegroundColor Green -NoNewline
     }
     else {
