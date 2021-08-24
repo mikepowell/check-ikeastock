@@ -3,27 +3,24 @@
 
 # Hashtable of product SKUs and # required for your project.
 $products = [ordered]@{
-  '00467908' = 4
-  '00468390' = 1
-  '10467936' = 1
-  '30265452' = 2
-  '30393652' = 2
   '30467935' = 2
-  '60467934' = 2
-  '80467914' = 2
-  '30265386' = 2
-  '90335211' = 1
-  '50467920' = 2
-  '80467933' = 2
+  '60467934' = 1
+  '30265386' = 1
+  '10467936' = 1
+  '00467908' = 4
+  '30265452' = 2
+  '00468390' = 1
+  '50334925' = 2
 }
 
 # Hashtable of store names and IDs. You can find these by running a whole-country
 # search for a product using ikea-availability-checker, e.g.:
 # ikea-availability stock --country us 30265386
 $stores = [ordered]@{
-  'Woodbridge' = 168
-  'Norfolk' = 569
+  'Woodbridge'  = 168
+  'Norfolk'     = 569
   'CollegePark' = 411
+  'Baltimore'   = 152
 }
 
 $items = @()
@@ -35,10 +32,10 @@ foreach ($product in $products.Keys) {
   Write-Host "$product - $($productInfo.mainImage.alt)" -NoNewline
 
   $item = [PSCustomObject]@{
-    Sku = $product
-    Required = $products[$product]
+    Sku         = $product
+    Required    = $products[$product]
     Description = $productInfo.mainImage.alt
-    Price = $productInfo.price
+    Price       = $productInfo.price
   }
   foreach ($store in $stores.Keys) {
     $storeId = $stores[$store]
@@ -47,6 +44,9 @@ foreach ($product in $products.Keys) {
     $item | Add-Member -MemberType NoteProperty -Name $store -Value $result.availability.stock
     if ($result.availability.stock -ge $products[$product]) {
       Write-Host " $store" -ForegroundColor Green -NoNewline
+    }
+    elseif ($result.availability.stock -gt 0) {
+      Write-Host " $store" -ForegroundColor Yellow -NoNewline
     }
     else {
       Write-Host " $store" -ForegroundColor Red -NoNewline
