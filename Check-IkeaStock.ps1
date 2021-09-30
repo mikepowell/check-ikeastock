@@ -4,12 +4,7 @@
 # Hashtable of product SKUs and # required for your project.
 $products = [ordered]@{
   '10467936' = 1  # AXSTAD matte blue 30x10 drawer front
-  '00466107' = 1  # AXSTAD dark gray 30x10 drawer front
-  '00467908' = 4  # AXSTAD matte blue 15x40 door
-  '90466080' = 4  # AXSTAD dark gray 15x40 door
-  '30475247' = 2  # AXSTAD matte blue deco strip
-  '50334925' = 2  # KUNGSFORS stainless shelf
-  '80334919' = 2  # KUNGSFORS wall rack
+  '00467908' = 2  # AXSTAD matte blue 15x40 door
 }
 
 # Hashtable of store names and IDs. You can find these by running a whole-country
